@@ -32,7 +32,8 @@ jobs:
         run: yarn install:marp
 
       - name: Build PPTX presentation
-        run: yarn build:pptx
+        run: |
+          npx @marp-team/marp-cli@latest ./src/kafka-introduction.md --pptx --output ./dist/kafka-introduction.pptx
 
       - name: Get tag name
         id: get_tag
