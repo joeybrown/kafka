@@ -33,7 +33,18 @@ jobs:
 
       - name: Build PPTX presentation
         run: |
-          npx @marp-team/marp-cli@latest ./src/kafka-introduction.md --pptx --output ./dist/kafka-introduction.pptx
+          # Create dist directory
+          mkdir -p ./dist
+
+          # Generate HTML first (more reliable)
+          npx @marp-team/marp-cli@latest ./src/kafka-introduction.md --html --output ./dist/kafka-introduction.html
+
+          # Try PPTX generation with additional options
+          npx @marp-team/marp-cli@latest ./src/kafka-introduction.md \
+            --pptx \
+            --output ./dist/kafka-introduction.pptx \
+            --theme default \
+            --allow-local-files
 
       - name: Get tag name
         id: get_tag
