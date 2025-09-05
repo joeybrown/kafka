@@ -1,4 +1,4 @@
-name: Build and Release PPTX
+name: Build and Release PDF
 
 on:
   push:
