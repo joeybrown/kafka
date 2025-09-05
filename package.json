@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "marp --input-dir ./src --output-dir ./dist",
-    "build:pdf": "marp --input-dir ./src --output-dir ./dist --pdf",
-    "build:html": "marp --input-dir ./src --output-dir ./dist --html",
+    "build:pdf": "marp ./src/kafka-introduction.md --pdf --output ./dist/kafka-introduction.pdf",
     "serve": "marp --input-dir ./src --server",
     "watch": "marp --input-dir ./src --output-dir ./dist --watch",
     "dev": "marp --input-dir ./src --server --watch",
@@ -21,9 +20,9 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@marp-team/marp-cli": "^3.4.0"
+    "@marp-team/marp-cli": "^4.2.3"
   },
   "dependencies": {
-    "@marp-team/marp-core": "^4.0.0"
+    "@marp-team/marp-core": "^4.1.0"
   }
 }

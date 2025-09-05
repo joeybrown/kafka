@@ -1,4 +1,4 @@
-name: Build and Release PDF
+name: Build and Release PPTX
 
 on:
   push:
@@ -36,10 +36,38 @@ jobs:
       - name: Install Marp CLI
         run: yarn install:marp
 
-      - name: Build PDF presentation
+      - name: Start Marp server and download presentations
         run: |
           mkdir -p ./dist
-          yarn build:pdf
+
+          # Start Marp server in background
+          yarn serve &
+          SERVER_PID=$!
+
+          # Poll server until ready (max 30 attempts, 1 second each)
+          echo "Waiting for server to start..."
+          for i in {1..30}; do
+            if curl -s -f "http://localhost:8080/kafka-introduction.md" > /dev/null 2>&1; then
+              echo "Server is ready after $i seconds"
+              break
+            fi
+            if [ $i -eq 30 ]; then
+              echo "Server failed to start after 30 seconds"
+              kill $SERVER_PID
+              exit 1
+            fi
+            sleep 1
+          done
+
+          # Download PPTX and PDF from server
+          curl -o ./dist/kafka-introduction.pptx "http://localhost:8080/kafka-introduction.md?pptx"
+          curl -o ./dist/kafka-introduction.pdf "http://localhost:8080/kafka-introduction.md?pdf"
+
+          # Stop the server
+          kill $SERVER_PID
+
+          # Verify files were downloaded
+          ls -la ./dist/
 
       - name: Get tag name
         id: get_tag
@@ -51,7 +79,19 @@ jobs:
             --title "Release ${{ steps.get_tag.outputs.TAG_NAME }}" \
             --notes "## Kafka Introduction Presentation
 
-          This release contains the PDF version of the Kafka introduction presentation.
+          This release contains both PowerPoint (PPTX) and PDF versions of the Kafka introduction presentation.
+
+          ### What's included:
+          - **kafka-introduction.pptx** - PowerPoint presentation file
+          - **kafka-introduction.pdf** - PDF presentation file
+
+          ### How to use:
+          - **PPTX**: Open with Microsoft PowerPoint, LibreOffice Impress, or any compatible presentation software
+          - **PDF**: Open with any PDF viewer or use in presentation mode for full-screen slides
+
+          ### Source:
+          Built from the markdown source in the \`src/\` directory using Marp." \
+            ./dist/kafka-introduction.pptx ./dist/kafka-introduction.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
