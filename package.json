@@ -1,0 +1,33 @@
+{
+  "name": "kafka-presentations",
+  "version": "1.0.0",
+  "description": "Marp presentations for Kafka topics",
+  "main": "index.js",
+  "packageManager": "yarn@1.22.22",
+  "scripts": {
+    "build": "marp --input-dir ./src --output-dir ./dist",
+    "build:pdf": "marp --input-dir ./src --output-dir ./dist --pdf",
+    "build:html": "marp --input-dir ./src --output-dir ./dist --html",
+    "build:pptx": "marp --input-dir ./src --output-dir ./dist --pptx",
+    "serve": "marp --input-dir ./src --server --port $PORT",
+    "watch": "marp --input-dir ./src --output-dir ./dist --watch",
+    "dev": "marp --input-dir ./src --server --watch",
+    "install:marp": "yarn add -D @marp-team/marp-cli && yarn add @marp-team/marp-core",
+    "start": "yarn serve",
+    "heroku-postbuild": "yarn install"
+  },
+  "keywords": [
+    "marp",
+    "presentations",
+    "kafka",
+    "markdown"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.2.3"
+  },
+  "dependencies": {
+    "@marp-team/marp-core": "^4.1.0"
+  }
+}
