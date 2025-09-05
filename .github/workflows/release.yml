@@ -3,8 +3,8 @@ name: Build and Release PPTX
 on:
   push:
     tags:
-      - "v*" # Trigger on version tags like v1.0.0, v1.2.3, etc.
-  workflow_dispatch: # Allow manual triggering
+      - "v*"
+  workflow_dispatch:
 
 jobs:
   build-and-release:
@@ -31,20 +31,10 @@ jobs:
       - name: Install Marp CLI
         run: yarn install:marp
 
-      - name: Build PPTX presentation
+      - name: Build PDF presentation
         run: |
-          # Create dist directory
           mkdir -p ./dist
-
-          # Generate HTML first (more reliable)
-          npx @marp-team/marp-cli@latest ./src/kafka-introduction.md --html --output ./dist/kafka-introduction.html
-
-          # Try PPTX generation with additional options
-          npx @marp-team/marp-cli@latest ./src/kafka-introduction.md \
-            --pptx \
-            --output ./dist/kafka-introduction.pptx \
-            --theme default \
-            --allow-local-files
+          yarn build:pdf
 
       - name: Get tag name
         id: get_tag
@@ -56,18 +46,7 @@ jobs:
             --title "Release ${{ steps.get_tag.outputs.TAG_NAME }}" \
             --notes "## Kafka Introduction Presentation
 
-          This release contains the PowerPoint (PPTX) version of the Kafka introduction presentation.
-
-          ### What's included:
-          - **kafka-introduction.pptx** - The main presentation file
-
-          ### How to use:
-          1. Download the PPTX file from the assets below
-          2. Open with Microsoft PowerPoint, LibreOffice Impress, or any compatible presentation software
-
-          ### Source:
-          Built from the markdown source in the \`src/\` directory using Marp." \
-            ./dist/kafka-introduction.pptx
+          This release contains the PDF version of the Kafka introduction presentation.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
