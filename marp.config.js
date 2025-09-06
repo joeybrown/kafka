@@ -1,18 +1,8 @@
-module.exports = {
-  // Enable HTML output
-  html: true,
-  
-  // Enable PDF output
-  pdf: true,
-  
-  // Enable PowerPoint output
-  pptx: true,
-  
-  // Custom theme configuration
-  theme: 'default',
-  
-  // Custom CSS
-  css: `
+export const html = true;
+export const pdf = true;
+export const pptx = true;
+export const theme = 'default';
+export const css = `
     section {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -35,21 +25,11 @@ module.exports = {
       border-radius: 8px;
       padding: 1em;
     }
-  `,
-  
-  // Output options
-  output: {
-    html: {
-      enabled: true,
-      output: './dist'
-    },
-    pdf: {
-      enabled: true,
-      output: './dist'
-    },
-    pptx: {
-      enabled: true,
-      output: './dist'
+    
+    img {
+      max-height: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
-  }
-};
+  `;

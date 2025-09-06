@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "Marp presentations for Kafka topics",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "build": "marp --input-dir ./src --output-dir ./dist",
-    "build:pdf": "marp ./src/kafka-introduction.md --pdf --output ./dist/kafka-introduction.pdf",
-    "serve": "marp --input-dir ./src --server",
-    "watch": "marp --input-dir ./src --output-dir ./dist --watch",
-    "dev": "marp --input-dir ./src --server --watch",
+    "build": "node scripts/build-diagrams.js && marp --input-dir ./src --output-dir ./dist --allow-local-files",
+    "build:pdf": "marp ./src/kafka-introduction.md --pdf --output ./dist/kafka-introduction.pdf --allow-local-files",
+    "serve": "node scripts/build-diagrams.js && marp --input-dir ./src --server --allow-local-files",
+    "watch": "node scripts/build-diagrams.js && marp --input-dir ./src --output-dir ./dist --watch --allow-local-files",
+    "dev": "node scripts/build-diagrams.js && marp --input-dir ./src --server --watch --allow-local-files",
     "install:marp": "yarn add -D @marp-team/marp-cli && yarn add @marp-team/marp-core"
   },
   "keywords": [
@@ -20,7 +21,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@marp-team/marp-cli": "^4.2.3"
+    "@marp-team/marp-cli": "^4.2.3",
+    "@mermaid-js/mermaid-cli": "^11.9.0",
+    "puppeteer": "^24.19.0",
+    "js-yaml": "^4.1.0"
   },
   "dependencies": {
     "@marp-team/marp-core": "^4.1.0"

@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant P as Producer
+    participant B as Broker
+    participant T as Topic
+    participant C as Consumer
+    
+    P->>B: Send message
+    B->>T: Store in partition
+    T-->>B: Acknowledge
+    B-->>P: Message received
+    
+    C->>B: Poll for messages
+    B->>T: Read from partition
+    T-->>B: Return messages
+    B-->>C: Deliver messages
+    C-->>B: Commit offset
