@@ -22,6 +22,10 @@ _Date: September 16, 2025_
 
 ---
 
+<img src="diagrams/kafka-sequence.svg" alt="Kafka Message Flow" class="kafka-sequence-svg">
+
+---
+
 # Key Concepts
 
 ## Core Components
