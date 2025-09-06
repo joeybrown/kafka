@@ -4,12 +4,12 @@ theme: default
 paginate: true
 ---
 
-# Apache Kafka
+# Event-Driven Design With Kafka
 
-## Introduction and Overview
+## An Introduction
 
-**Your Name**  
-_Date: $(date)_
+**Joey Brown**  
+_Date: September 16, 2025_
 
 ---
 
