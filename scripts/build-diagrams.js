@@ -32,26 +32,13 @@ files.forEach(file => {
   console.log(`Building ${file}...`);
   
   try {
-    execSync(`npx mmdc -i "${inputFile}" -o "${outputFile}" -w 1200 -H 800 -b transparent`, { stdio: 'inherit' });
-    
-    // Post-process SVG to remove only the problematic sizing attributes
-    let svgContent = fs.readFileSync(outputFile, 'utf8');
-    // Only remove the specific max-width style that conflicts with CSS
-    svgContent = svgContent.replace(/style="max-width: [^"]*"/g, '');
-    // Remove width and height from the root SVG element only
-    svgContent = svgContent.replace(/<svg[^>]*width="[^"]*"[^>]*>/g, (match) => {
-      return match.replace(/width="[^"]*"/g, '');
-    });
-    svgContent = svgContent.replace(/<svg[^>]*height="[^"]*"[^>]*>/g, (match) => {
-      return match.replace(/height="[^"]*"/g, '');
-    });
-    fs.writeFileSync(outputFile, svgContent);
+    execSync(`yarn mmdc -i "${inputFile}" -o "${outputFile}" -w 500 -b transparent`, { stdio: 'inherit' });
     
     // Copy SVG to src/diagrams for serving
     const srcSvgPath = path.join(diagramsSrcOutputDir, `${file}.svg`);
     fs.copyFileSync(outputFile, srcSvgPath);
     
-    console.log(`✅ ${file}.svg generated and cleaned`);
+    console.log(`✅ ${file}.svg generated`);
   } catch (error) {
     console.error(`❌ Failed to build ${file}:`, error.message);
     process.exit(1);

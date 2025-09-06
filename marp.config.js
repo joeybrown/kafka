@@ -33,13 +33,16 @@ export const css = `
       margin: 0 auto;
     }
     
-    img.kafka-sequence-svg {
-      max-width: 70% !important;
-      max-height: 40vh !important;
-      width: auto !important;
-      height: auto !important;
+    .diagram-container {
+      width: 500px !important;
+      height: 300px !important;
+      margin: 0 auto !important;
+      overflow: hidden !important;
+    }
+    
+    .diagram-container img {
+      width: 100% !important;
+      height: 100% !important;
       object-fit: contain !important;
-      image-rendering: -webkit-optimize-contrast !important;
-      image-rendering: crisp-edges !important;
     }
   `;
