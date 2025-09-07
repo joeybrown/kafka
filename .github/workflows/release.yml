@@ -33,8 +33,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Install Marp CLI
-        run: yarn install:marp
+      - name: Build diagrams
+        run: node scripts/build-diagrams.js
 
       - name: Start Marp server and download presentations
         run: |
