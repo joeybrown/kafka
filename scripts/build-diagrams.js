@@ -47,7 +47,7 @@ files.forEach(file => {
   console.log(`Building ${file}... (width: ${width}px)`);
   
   try {
-    execSync(`yarn mmdc -i "${inputFile}" -o "${outputFile}" -w ${width} -b transparent`, { stdio: 'inherit' });
+    execSync(`yarn mmdc -p puppeteer-config.json -i "${inputFile}" -o "${outputFile}" -w ${width} -b transparent`, { stdio: 'inherit' });
     
     // Post-process the SVG to match configured width (height will be auto-calculated)
     let svgContent = fs.readFileSync(outputFile, 'utf8');
