@@ -3,10 +3,21 @@
 import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
+import yaml from 'js-yaml';
 
 const diagramsSrcDir = './diagrams';
 const diagramsDistDir = './dist/diagrams';
 const diagramsSrcOutputDir = './src/diagrams';
+const sizingConfigPath = './diagrams/sizing.yml';
+
+// Load sizing configuration
+let sizingConfig = {};
+try {
+  const configFile = fs.readFileSync(sizingConfigPath, 'utf8');
+  sizingConfig = yaml.load(configFile);
+} catch (error) {
+  console.warn('⚠️  Could not load sizing.yml, using default sizes');
+}
 
 // Ensure dist directories exist
 if (!fs.existsSync(diagramsDistDir)) {
@@ -29,17 +40,21 @@ files.forEach(file => {
   const inputFile = path.join(diagramsSrcDir, `${file}.mmd`);
   const outputFile = path.join(diagramsDistDir, `${file}.svg`);
   
-  console.log(`Building ${file}...`);
+  // Get sizing configuration for this diagram
+  const diagramConfig = sizingConfig.diagrams?.[file] || { width: 500, height: 300 };
+  const { width, height } = diagramConfig;
+  
+  console.log(`Building ${file}... (${width}x${height})`);
   
   try {
-    execSync(`yarn mmdc -i "${inputFile}" -o "${outputFile}" -w 500 -b transparent`, { stdio: 'inherit' });
+    execSync(`yarn mmdc -i "${inputFile}" -o "${outputFile}" -w ${width} -b transparent`, { stdio: 'inherit' });
     
-    // Post-process the SVG to make it responsive
+    // Post-process the SVG to match configured size
     let svgContent = fs.readFileSync(outputFile, 'utf8');
     
-    // Update SVG to match container size exactly
-    svgContent = svgContent.replace(/style="max-width: [^"]*"/, 'style="max-width: 500px; width: 500px; height: 300px;"');
-    svgContent = svgContent.replace(/width="100%"/, 'width="500" height="300"');
+    // Update SVG to match configured size exactly
+    svgContent = svgContent.replace(/style="max-width: [^"]*"/, `style="max-width: ${width}px; width: ${width}px; height: ${height}px;"`);
+    svgContent = svgContent.replace(/width="100%"/, `width="${width}" height="${height}"`);
     
     // Write the processed SVG
     fs.writeFileSync(outputFile, svgContent);
@@ -48,7 +63,7 @@ files.forEach(file => {
     const srcSvgPath = path.join(diagramsSrcOutputDir, `${file}.svg`);
     fs.copyFileSync(outputFile, srcSvgPath);
     
-    console.log(`✅ ${file}.svg generated`);
+    console.log(`✅ ${file}.svg generated (${width}x${height})`);
   } catch (error) {
     console.error(`❌ Failed to build ${file}:`, error.message);
     process.exit(1);

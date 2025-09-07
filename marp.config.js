@@ -32,17 +32,4 @@ export const css = `
       display: block;
       margin: 0 auto;
     }
-    
-    .diagram-container {
-      width: 500px !important;
-      height: 300px !important;
-      margin: 0 auto !important;
-      overflow: hidden !important;
-    }
-    
-    .diagram-container img {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: contain !important;
-    }
   `;
