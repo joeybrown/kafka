@@ -23,10 +23,10 @@
   "devDependencies": {
     "@marp-team/marp-cli": "^4.2.3",
     "@mermaid-js/mermaid-cli": "^11.9.0",
-    "puppeteer": "^24.19.0"
+    "puppeteer": "^24.19.0",
+    "js-yaml": "^4.1.0"
   },
   "dependencies": {
-    "@marp-team/marp-core": "^4.1.0",
-    "js-yaml": "^4.1.0"
+    "@marp-team/marp-core": "^4.1.0"
   }
 }

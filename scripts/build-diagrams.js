@@ -41,20 +41,20 @@ files.forEach(file => {
   const outputFile = path.join(diagramsDistDir, `${file}.svg`);
   
   // Get sizing configuration for this diagram
-  const diagramConfig = sizingConfig.diagrams?.[file] || { width: 500, height: 300 };
-  const { width, height } = diagramConfig;
+  const diagramConfig = sizingConfig.diagrams?.[file] || { width: 500 };
+  const { width } = diagramConfig;
   
-  console.log(`Building ${file}... (${width}x${height})`);
+  console.log(`Building ${file}... (width: ${width}px)`);
   
   try {
     execSync(`yarn mmdc -i "${inputFile}" -o "${outputFile}" -w ${width} -b transparent`, { stdio: 'inherit' });
     
-    // Post-process the SVG to match configured size
+    // Post-process the SVG to match configured width (height will be auto-calculated)
     let svgContent = fs.readFileSync(outputFile, 'utf8');
     
-    // Update SVG to match configured size exactly
-    svgContent = svgContent.replace(/style="max-width: [^"]*"/, `style="max-width: ${width}px; width: ${width}px; height: ${height}px;"`);
-    svgContent = svgContent.replace(/width="100%"/, `width="${width}" height="${height}"`);
+    // Update SVG to use configured width with auto height
+    svgContent = svgContent.replace(/style="max-width: [^"]*"/, `style="max-width: ${width}px; width: ${width}px;"`);
+    svgContent = svgContent.replace(/width="100%"/, `width="${width}"`);
     
     // Write the processed SVG
     fs.writeFileSync(outputFile, svgContent);
@@ -63,7 +63,7 @@ files.forEach(file => {
     const srcSvgPath = path.join(diagramsSrcOutputDir, `${file}.svg`);
     fs.copyFileSync(outputFile, srcSvgPath);
     
-    console.log(`✅ ${file}.svg generated (${width}x${height})`);
+    console.log(`✅ ${file}.svg generated (width: ${width}px)`);
   } catch (error) {
     console.error(`❌ Failed to build ${file}:`, error.message);
     process.exit(1);

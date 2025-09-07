@@ -1,10 +1,5 @@
 # Diagram sizing configuration
-# Each diagram can have custom width and height settings
+# Each diagram can have custom width settings (height is calculated automatically)
 diagrams:
   kafka-sequence:
-    width: 600
-    height: 400
-  # Add more diagrams here as needed
-  # example-diagram:
-  #   width: 400
-  #   height: 200
+    width: 900
