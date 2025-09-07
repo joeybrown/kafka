@@ -34,6 +34,16 @@ files.forEach(file => {
   try {
     execSync(`yarn mmdc -i "${inputFile}" -o "${outputFile}" -w 500 -b transparent`, { stdio: 'inherit' });
     
+    // Post-process the SVG to make it responsive
+    let svgContent = fs.readFileSync(outputFile, 'utf8');
+    
+    // Update SVG to match container size exactly
+    svgContent = svgContent.replace(/style="max-width: [^"]*"/, 'style="max-width: 500px; width: 500px; height: 300px;"');
+    svgContent = svgContent.replace(/width="100%"/, 'width="500" height="300"');
+    
+    // Write the processed SVG
+    fs.writeFileSync(outputFile, svgContent);
+    
     // Copy SVG to src/diagrams for serving
     const srcSvgPath = path.join(diagramsSrcOutputDir, `${file}.svg`);
     fs.copyFileSync(outputFile, srcSvgPath);
