@@ -4,12 +4,12 @@ sequenceDiagram
     participant T as Topic
     participant C as Consumer
     
-    P->>B: Send message
+    P->>B: Send message (event)
     B->>T: Store in partition
     T-->>B: Acknowledge
     B-->>P: Message received
     
-    C->>B: Poll for messages
+    C->>B: Poll for messages (events)
     B->>T: Read from partition
     T-->>B: Return messages
     B-->>C: Deliver messages

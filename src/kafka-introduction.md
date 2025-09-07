@@ -6,10 +6,10 @@ paginate: true
 
 # Event-Driven Design With Kafka
 
-## An Introduction
-
-**Joey Brown**  
+**Joey Brown**
 _Date: September 16, 2025_
+
+![w:200](logo.png)
 
 ---
 
@@ -21,6 +21,64 @@ _Date: September 16, 2025_
 - Originally developed by **LinkedIn**
 
 ---
+
+# Where is Kakfa Used?
+
+- Real-time **Analytics**
+- System **Integration**
+- **Event Sourcing**
+- Stream **Processing**
+
+---
+
+# Why is Kakfa?
+
+- Created by LinkedIn 2010 - Real time data feeds
+- Essentially solution to **batch processing latency**
+- Graduated Apache Software Foundation Incubator in 2012
+
+---
+
+# Event Processing vs Messaging
+
+**Messaging** - Publisher/Subscriber
+
+- "Process this request"
+- "Remove this item from inventory"
+
+**Eventing** - Producer/Consumer
+
+- "This request was just recieved"
+- "This product was just purchased"
+
+---
+
+# Messaging/Eventing System Broker Types
+
+Smart Broker/Dumb Consumer
+
+- RabbitMQ
+- NATS Jetstream
+- Redis
+
+Dumb Broker/Smart Consumer
+
+- Kafka
+- Azure Event Hub
+
+---
+
+# How it works
+
+How does kafka work?
+
+How do producers publish events?
+
+How do consumers consume events?
+
+---
+
+# General Flow
 
 <img src="diagrams/kafka-sequence.svg" alt="Kafka Message Flow" class="kafka-sequence-svg">
 
@@ -38,74 +96,42 @@ _Date: September 16, 2025_
 
 ---
 
-# Architecture Overview
+# Topics
 
-```
-Producer → Topic (Partition 0, 1, 2) → Consumer
-    ↓              ↓                    ↑
-  Broker 1      Broker 2            Broker 3
-```
+Category of events
 
-- **Distributed** across multiple brokers
-- **Replicated** for fault tolerance
-- **Partitioned** for scalability
+- Orders in a retail system
+- Patient percriptions in a healthcare system
+- Package lifecycle events in a parcel delivery system
 
 ---
 
-# Use Cases
+# Partitions
 
-## Real-time Data Processing
+How the events are persisted on disk (partition key)
 
-- **Event streaming**
-- **Log aggregation**
-- **Metrics collection**
+Dictates how events are consumed (guarantees order)
 
-## Integration
+- OrderID
+- PatientID
+- ParcelID
 
-- **Microservices communication**
-- **Data pipeline**
-- **Change data capture**
+Topic partitions are independently configured
 
 ---
 
-# Benefits
+# Important Considerations
 
-✅ **High Performance** - Millions of messages per second  
-✅ **Durability** - Messages persisted to disk  
-✅ **Scalability** - Horizontal scaling  
-✅ **Fault Tolerance** - No single point of failure  
-✅ **Real-time** - Low latency processing
-
----
-
-# Getting Started
-
-## Quick Setup
-
-```bash
-# Download Kafka
-wget https://downloads.apache.org/kafka/...
-
-# Start Zookeeper
-bin/zookeeper-server-start.sh config/zookeeper.properties
-
-# Start Kafka
-bin/kafka-server-start.sh config/server.properties
-```
-
----
-
-# Next Steps
-
-1. **Create your first topic**
-2. **Write a producer**
-3. **Write a consumer**
-4. **Explore advanced features**
+- Service ownership
+- Observability
+- Event loss remediation
+- Topic versioning, Event versioning
+- Capacity planning
 
 ## Resources
 
 - [Official Documentation](https://kafka.apache.org/documentation/)
-- [Confluent Platform](https://www.confluent.io/)
+- [Apache Kafka on Heroku](https://devcenter.heroku.com/articles/kafka-on-heroku)
 
 ---
 
