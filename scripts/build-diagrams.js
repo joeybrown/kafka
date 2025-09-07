@@ -47,16 +47,7 @@ files.forEach(file => {
   console.log(`Building ${file}... (width: ${width}px)`);
   
   try {
-    // Set Puppeteer args for GitHub Actions compatibility
-    const env = {
-      ...process.env,
-      PUPPETEER_ARGS: '--no-sandbox --disable-setuid-sandbox'
-    };
-    
-    execSync(`yarn mmdc -i "${inputFile}" -o "${outputFile}" -w ${width} -b transparent`, { 
-      stdio: 'inherit',
-      env 
-    });
+    execSync(`yarn mmdc -i "${inputFile}" -o "${outputFile}" -w ${width} -b transparent`, { stdio: 'inherit' });
     
     // Post-process the SVG to match configured width (height will be auto-calculated)
     let svgContent = fs.readFileSync(outputFile, 'utf8');

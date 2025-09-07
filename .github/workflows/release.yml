@@ -35,6 +35,8 @@ jobs:
 
       - name: Build diagrams
         run: node scripts/build-diagrams.js
+        env:
+          PUPPETEER_ARGS: "--no-sandbox --disable-setuid-sandbox"
 
       - name: Start Marp server and download presentations
         run: |
