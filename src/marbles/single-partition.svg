@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #2c3e50; }
+      .description { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; fill: #7f8c8d; }
+      .stream-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; font-weight: 600; fill: #34495e; }
+      .timeline { stroke: #34495e; stroke-width: 3; fill: none; }
+      .timeline-arrow { stroke: #34495e; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+      .producer-bg { fill: #e8f5e8; fill-opacity: 0.3; stroke: #27ae60; stroke-width: 1; stroke-dasharray: 5,5; }
+      .partition-bg { fill: #e8f4fd; fill-opacity: 0.3; stroke: #3498db; stroke-width: 1; stroke-dasharray: 5,5; }
+      .consumer-bg { fill: #fef9e7; fill-opacity: 0.3; stroke: #f39c12; stroke-width: 1; stroke-dasharray: 5,5; }
+      .marble { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+      .marble-blue { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+      .marble-green { fill: #27ae60; stroke: #229954; stroke-width: 2; }
+      .marble-purple { fill: #9b59b6; stroke: #8e44ad; stroke-width: 2; }
+      .marble-orange { fill: #f39c12; stroke: #e67e22; stroke-width: 2; }
+      .marble-red { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+      .marble-yellow { fill: #f1c40f; stroke: #f39c12; stroke-width: 2; }
+      .marble-teal { fill: #1abc9c; stroke: #16a085; stroke-width: 2; }
+      .marble-pink { fill: #e91e63; stroke: #c2185b; stroke-width: 2; }
+      .marble-indigo { fill: #6366f1; stroke: #4f46e5; stroke-width: 2; }
+      .marble-cyan { fill: #06b6d4; stroke: #0891b2; stroke-width: 2; }
+      .marble-lime { fill: #84cc16; stroke: #65a30d; stroke-width: 2; }
+      .marble-amber { fill: #f59e0b; stroke: #d97706; stroke-width: 2; }
+      .marble-emerald { fill: #10b981; stroke: #059669; stroke-width: 2; }
+      .marble-rose { fill: #f43f5e; stroke: #e11d48; stroke-width: 2; }
+      .marble-violet { fill: #8b5cf6; stroke: #7c3aed; stroke-width: 2; }
+      .marble-sky { fill: #0ea5e9; stroke: #0284c7; stroke-width: 2; }
+      .marble-stone { fill: #78716c; stroke: #57534e; stroke-width: 2; }
+      .marble-slate { fill: #64748b; stroke: #475569; stroke-width: 2; }
+      .marble-zinc { fill: #71717a; stroke: #52525b; stroke-width: 2; }
+      .marble-neutral { fill: #a3a3a3; stroke: #737373; stroke-width: 2; }
+      .marble-error { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+      .marble-complete { fill: #27ae60; stroke: #229954; stroke-width: 2; }
+      .marble-special { fill: #f39c12; stroke: #e67e22; stroke-width: 2; }
+      .frame-marker { stroke: #bdc3c7; stroke-width: 1; fill: none; }
+      .frame-number { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; fill: #95a5a6; }
+      .marble-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; font-weight: bold; fill: white; text-anchor: middle; }
+      .marble-text-dark { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #2c3e50; text-anchor: middle; }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#34495e" />
+    </marker>
+    <filter id="marbleShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="400" fill="#f8f9fa" stroke="none"/>
+  
+  <!-- Title -->
+  <text x="30" y="35" class="title">Single Partition Processing</text>
+  <text x="30" y="55" class="description">Messages flowing through a single Kafka partition in order</text>
+  
+  <!-- Frame markers -->
+  
+      <line x1="50" y1="100" x2="50" y2="360" class="frame-marker" />
+      <text x="50" y="380" class="frame-number" text-anchor="middle">0</text>
+    
+      <line x1="86.84210526315789" y1="100" x2="86.84210526315789" y2="360" class="frame-marker" />
+      <text x="86.84210526315789" y="380" class="frame-number" text-anchor="middle">1</text>
+    
+      <line x1="123.6842105263158" y1="100" x2="123.6842105263158" y2="360" class="frame-marker" />
+      <text x="123.6842105263158" y="380" class="frame-number" text-anchor="middle">2</text>
+    
+      <line x1="160.5263157894737" y1="100" x2="160.5263157894737" y2="360" class="frame-marker" />
+      <text x="160.5263157894737" y="380" class="frame-number" text-anchor="middle">3</text>
+    
+      <line x1="197.3684210526316" y1="100" x2="197.3684210526316" y2="360" class="frame-marker" />
+      <text x="197.3684210526316" y="380" class="frame-number" text-anchor="middle">4</text>
+    
+      <line x1="234.21052631578948" y1="100" x2="234.21052631578948" y2="360" class="frame-marker" />
+      <text x="234.21052631578948" y="380" class="frame-number" text-anchor="middle">5</text>
+    
+      <line x1="271.0526315789474" y1="100" x2="271.0526315789474" y2="360" class="frame-marker" />
+      <text x="271.0526315789474" y="380" class="frame-number" text-anchor="middle">6</text>
+    
+      <line x1="307.89473684210526" y1="100" x2="307.89473684210526" y2="360" class="frame-marker" />
+      <text x="307.89473684210526" y="380" class="frame-number" text-anchor="middle">7</text>
+    
+      <line x1="344.7368421052632" y1="100" x2="344.7368421052632" y2="360" class="frame-marker" />
+      <text x="344.7368421052632" y="380" class="frame-number" text-anchor="middle">8</text>
+    
+      <line x1="381.57894736842104" y1="100" x2="381.57894736842104" y2="360" class="frame-marker" />
+      <text x="381.57894736842104" y="380" class="frame-number" text-anchor="middle">9</text>
+    
+      <line x1="418.42105263157896" y1="100" x2="418.42105263157896" y2="360" class="frame-marker" />
+      <text x="418.42105263157896" y="380" class="frame-number" text-anchor="middle">10</text>
+    
+      <line x1="455.2631578947368" y1="100" x2="455.2631578947368" y2="360" class="frame-marker" />
+      <text x="455.2631578947368" y="380" class="frame-number" text-anchor="middle">11</text>
+    
+      <line x1="492.10526315789474" y1="100" x2="492.10526315789474" y2="360" class="frame-marker" />
+      <text x="492.10526315789474" y="380" class="frame-number" text-anchor="middle">12</text>
+    
+      <line x1="528.9473684210527" y1="100" x2="528.9473684210527" y2="360" class="frame-marker" />
+      <text x="528.9473684210527" y="380" class="frame-number" text-anchor="middle">13</text>
+    
+      <line x1="565.7894736842105" y1="100" x2="565.7894736842105" y2="360" class="frame-marker" />
+      <text x="565.7894736842105" y="380" class="frame-number" text-anchor="middle">14</text>
+    
+      <line x1="602.6315789473684" y1="100" x2="602.6315789473684" y2="360" class="frame-marker" />
+      <text x="602.6315789473684" y="380" class="frame-number" text-anchor="middle">15</text>
+    
+      <line x1="639.4736842105264" y1="100" x2="639.4736842105264" y2="360" class="frame-marker" />
+      <text x="639.4736842105264" y="380" class="frame-number" text-anchor="middle">16</text>
+    
+      <line x1="676.3157894736842" y1="100" x2="676.3157894736842" y2="360" class="frame-marker" />
+      <text x="676.3157894736842" y="380" class="frame-number" text-anchor="middle">17</text>
+    
+      <line x1="713.1578947368421" y1="100" x2="713.1578947368421" y2="360" class="frame-marker" />
+      <text x="713.1578947368421" y="380" class="frame-number" text-anchor="middle">18</text>
+    
+      <line x1="750" y1="100" x2="750" y2="360" class="frame-marker" />
+      <text x="750" y="380" class="frame-number" text-anchor="middle">19</text>
+    
+  
+  <!-- Component group backgrounds -->
+  <rect x="20" y="75" width="760" height="65" class="producer-bg" /><rect x="20" y="175" width="760" height="65" class="partition-bg" /><rect x="20" y="275" width="760" height="65" class="consumer-bg" />
+  
+  <!-- Streams -->
+  
+      <!-- Producer stream -->
+      <text x="30" y="95" class="stream-label">Producer:</text>
+      <line x1="50" y1="120" x2="750" y2="120" class="timeline" />
+      <line x1="750" y1="120" x2="770" y2="120" class="timeline-arrow" />
+      
+      
+      <g filter="url(#marbleShadow)">
+        <circle cx="50" cy="120" r="12" class="marble-blue" />
+        <text x="50" y="124" class="marble-text">a</text>
+      </g>
+    
+      <g filter="url(#marbleShadow)">
+        <circle cx="190" cy="120" r="12" class="marble-green" />
+        <text x="190" y="124" class="marble-text">b</text>
+      </g>
+    
+      <g filter="url(#marbleShadow)">
+        <circle cx="330" cy="120" r="12" class="marble-purple" />
+        <text x="330" y="124" class="marble-text">c</text>
+      </g>
+    
+      <g filter="url(#marbleShadow)">
+        <circle cx="470" cy="120" r="12" class="marble-orange" />
+        <text x="470" y="124" class="marble-text">d</text>
+      </g>
+    
+      <g filter="url(#marbleShadow)">
+        <circle cx="610" cy="120" r="12" class="marble-red" />
+        <text x="610" y="124" class="marble-text">e</text>
+      </g>
+    
+    
+      <!-- Partition stream -->
+      <text x="30" y="195" class="stream-label">Partition:</text>
+      <line x1="50" y1="220" x2="750" y2="220" class="timeline" />
+      <line x1="750" y1="220" x2="770" y2="220" class="timeline-arrow" />
+      
+      
+      <g filter="url(#marbleShadow)">
+        <circle cx="50" cy="220" r="12" class="marble-blue" />
+        <text x="50" y="224" class="marble-text">a</text>
+      </g>
+    
+      <g filter="url(#marbleShadow)">
+        <circle cx="190" cy="220" r="12" class="marble-green" />
+        <text x="190" y="224" class="marble-text">b</text>
+      </g>
+    
+      <g filter="url(#marbleShadow)">
+        <circle cx="330" cy="220" r="12" class="marble-purple" />
+        <text x="330" y="224" class="marble-text">c</text>
+      </g>
+    
+      <g filter="url(#marbleShadow)">
+        <circle cx="470" cy="220" r="12" class="marble-orange" />
+        <text x="470" y="224" class="marble-text">d</text>
+      </g>
+    
+      <g filter="url(#marbleShadow)">
+        <circle cx="610" cy="220" r="12" class="marble-red" />
+        <text x="610" y="224" class="marble-text">e</text>
+      </g>
+    
+    
+      <!-- Consumer stream -->
+      <text x="30" y="295" class="stream-label">Consumer:</text>
+      <line x1="50" y1="320" x2="750" y2="320" class="timeline" />
+      <line x1="750" y1="320" x2="770" y2="320" class="timeline-arrow" />
+      
+      
+      <g filter="url(#marbleShadow)">
+        <circle cx="85" cy="320" r="12" class="marble-blue" />
+        <text x="85" y="324" class="marble-text">a</text>
+      </g>
+    
+      <g filter="url(#marbleShadow)">
+        <circle cx="225" cy="320" r="12" class="marble-green" />
+        <text x="225" y="324" class="marble-text">b</text>
+      </g>
+    
+      <g filter="url(#marbleShadow)">
+        <circle cx="365" cy="320" r="12" class="marble-purple" />
+        <text x="365" y="324" class="marble-text">c</text>
+      </g>
+    
+      <g filter="url(#marbleShadow)">
+        <circle cx="505" cy="320" r="12" class="marble-orange" />
+        <text x="505" y="324" class="marble-text">d</text>
+      </g>
+    
+      <g filter="url(#marbleShadow)">
+        <circle cx="645" cy="320" r="12" class="marble-red" />
+        <text x="645" y="324" class="marble-text">e</text>
+      </g>
+    
+    
+  
+</svg>

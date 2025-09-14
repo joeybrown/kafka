@@ -120,6 +120,38 @@ Topic partitions are independently configured
 
 ---
 
+# Partition Processing Visualization
+
+![w:800](marbles/single-partition.svg)
+
+**Single Partition Flow** - Messages flow through one partition in order
+
+---
+
+# Multiple Partition Processing
+
+![w:1000](marbles/multiple-partitions.svg)
+
+**Load Distribution** - Messages distributed across multiple partitions for parallel processing
+
+---
+
+# Consumer Group Rebalancing
+
+![w:1200](marbles/partition-rebalancing.svg)
+
+**Dynamic Scaling** - How consumers handle partition reassignment when group membership changes
+
+---
+
+# Backpressure Handling
+
+![w:1000](marbles/backpressure.svg)
+
+**Rate Control** - How consumers handle high message rates with buffering
+
+---
+
 # Important Considerations
 
 - Service ownership

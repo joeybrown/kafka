@@ -1,0 +1,112 @@
+# Kafka Marble Diagrams Configuration
+# This file defines various Kafka partition scenarios as marble diagrams
+
+diagrams:
+  single-partition:
+    title: "Single Partition Processing"
+    description: "Messages flowing through a single Kafka partition in order"
+    width: 800
+    height: 400
+    streams:
+      producer: "a---b---c---d---e"
+      partition: "a---b---c---d---e"
+      consumer: "-a---b---c---d---e"
+
+  multiple-partitions:
+    title: "Multiple Partition Processing"
+    description: "Messages distributed across multiple partitions for parallel processing"
+    width: 1000
+    height: 500
+    streams:
+      producer: "a---b---c---d---e---f"
+      partition0: "a-------c-------e"
+      partition1: "----b-------d-------f"
+      consumer: "--a---b---c---d---e---f"
+
+  partition-rebalancing:
+    title: "Consumer Group Rebalancing"
+    description: "How consumers handle partition reassignment when group membership changes"
+    width: 1200
+    height: 600
+    streams:
+      partition0: "a---b---c---d---e---f"
+      partition1: "---x---y---z---w---v---u"
+      consumer1: "a---b---c---d---e---f"
+      consumer2: "---x---y---z---w---v---u"
+      rebalance: "-------R"
+
+  backpressure:
+    title: "Backpressure Handling"
+    description: "How consumers handle high message rates with buffering"
+    width: 1000
+    height: 450
+    streams:
+      producer: "a-b-c-d-e-f-g-h-i-j-k-l"
+      consumer: "a---b---c---d---e---f"
+      buffer: "--b-c-d-e-f-g-h-i-j-k-l"
+
+  exactly-once:
+    title: "Exactly-Once Processing"
+    description: "Ensuring messages are processed exactly once with idempotent operations"
+    width: 1000
+    height: 500
+    streams:
+      message: "a---b---c---d---e---f"
+      processing: "a---b---c---d---e---f"
+      commit: "----a---b---c---d---e---f"
+      duplicate: "-------c"
+
+  partition-assignment:
+    title: "Partition Assignment Strategies"
+    description: "Different strategies for assigning partitions to consumers"
+    width: 1200
+    height: 550
+    streams:
+      round_robin: "a---c---e---g---i---k"
+      range: "a---b---c---d---e---f"
+      sticky: "a---b---c---d---e---f"
+      cooperative: "a---b---c---d---e---f"
+
+  message-ordering:
+    title: "Message Ordering Guarantees"
+    description: "How Kafka maintains ordering within partitions"
+    width: 1000
+    height: 450
+    streams:
+      producer: "a---b---c---d---e---f"
+      partition: "a---b---c---d---e---f"
+      consumer: "a---b---c---d---e---f"
+      out_of_order: "a---c---b---d---e---f"
+
+  consumer-lag:
+    title: "Consumer Lag Visualization"
+    description: "How consumer lag affects processing and recovery"
+    width: 1000
+    height: 500
+    streams:
+      producer: "a---b---c---d---e---f---g---h"
+      consumer: "a---b---c---d---e---f---g---h"
+      lag: "-------L-------L-------L-------L"
+      catch_up: "a---b---c---d---e---f---g---h"
+
+  dead-letter-queue:
+    title: "Dead Letter Queue Pattern"
+    description: "How failed messages are handled and retried"
+    width: 1000
+    height: 500
+    streams:
+      message: "a---b---c---d---e---f"
+      processing: "a---b---X---d---e---X"
+      retry: "-------c-------f"
+      dlq: "-------X-------X"
+
+  compaction:
+    title: "Log Compaction"
+    description: "How Kafka maintains the latest value for each key"
+    width: 1000
+    height: 450
+    streams:
+      key_a: "a1--a2--a3--a4--a5--a6"
+      key_b: "---b1--b2--b3--b4--b5--b6"
+      compacted: "a1--a2--a3--a4--a5--a6"
+      compact: "-------C-------C-------C"

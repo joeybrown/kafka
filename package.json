@@ -5,11 +5,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "node scripts/build-diagrams.js && marp --input-dir ./src --output-dir ./dist --allow-local-files",
+    "build": "node scripts/build-diagrams.js && node scripts/build-marbles.js && marp --input-dir ./src --output-dir ./dist --allow-local-files",
     "build:pdf": "marp ./src/kafka-introduction.md --pdf --output ./dist/kafka-introduction.pdf --allow-local-files",
-    "serve": "node scripts/build-diagrams.js && marp --input-dir ./src --server --allow-local-files",
-    "watch": "node scripts/build-diagrams.js && marp --input-dir ./src --output-dir ./dist --watch --allow-local-files",
-    "dev": "node scripts/build-diagrams.js && marp --input-dir ./src --server --watch --allow-local-files",
+    "serve": "node scripts/build-diagrams.js && node scripts/build-marbles.js && marp --input-dir ./src --server --allow-local-files",
+    "watch": "node scripts/build-diagrams.js && node scripts/build-marbles.js && marp --input-dir ./src --output-dir ./dist --watch --allow-local-files",
+    "dev": "node scripts/build-diagrams.js && node scripts/build-marbles.js && marp --input-dir ./src --server --watch --allow-local-files",
+    "marbles": "node scripts/build-marbles.js",
     "install:marp": "yarn add -D @marp-team/marp-cli && yarn add @marp-team/marp-core"
   },
   "keywords": [
@@ -24,7 +25,9 @@
     "@marp-team/marp-cli": "^4.2.3",
     "@mermaid-js/mermaid-cli": "^11.9.0",
     "puppeteer": "^24.19.0",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "rxjs": "^7.8.1",
+    "rxjs-marbles": "^7.0.0"
   },
   "dependencies": {
     "@marp-team/marp-core": "^4.1.0"
