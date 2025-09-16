@@ -12,23 +12,29 @@
 <h1 id="kafka-partition-marble-diagrams">Kafka Partition Marble Diagrams</h1>
 <p>This directory contains RxJS-style marble diagrams that visualize how Kafka partitions work.</p>
 <h2 id="generated-diagrams">Generated Diagrams</h2>
+<h3 id="topic-processing">Topic Processing</h3>
+<ul>
+<li><strong>File</strong>: <code>simple-topic.svg</code></li>
+<li><strong>Description</strong>: Consumers track offsets</li>
+<li><strong>Dimensions</strong>: 800x400px</li>
+</ul>
 <h3 id="single-partition-processing">Single Partition Processing</h3>
 <ul>
 <li><strong>File</strong>: <code>single-partition.svg</code></li>
 <li><strong>Description</strong>: Messages flowing through a single Kafka partition in order</li>
 <li><strong>Dimensions</strong>: 800x400px</li>
 </ul>
-<h3 id="multiple-partition-processing">Multiple Partition Processing</h3>
+<h3 id="multiple-partitions-single-consumer">Multiple Partitions Single Consumer</h3>
 <ul>
-<li><strong>File</strong>: <code>multiple-partitions.svg</code></li>
-<li><strong>Description</strong>: Messages distributed across multiple partitions for parallel processing</li>
+<li><strong>File</strong>: <code>multiple-partitions-single-consumer.svg</code></li>
+<li><strong>Description</strong>: Messages distributed across multiple partitions</li>
 <li><strong>Dimensions</strong>: 1000x500px</li>
 </ul>
-<h3 id="consumer-group-rebalancing">Consumer Group Rebalancing</h3>
+<h3 id="multiple-partitions-multiple-consumers">Multiple Partitions Multiple Consumers</h3>
 <ul>
-<li><strong>File</strong>: <code>partition-rebalancing.svg</code></li>
-<li><strong>Description</strong>: How consumers handle partition reassignment when group membership changes</li>
-<li><strong>Dimensions</strong>: 1200x600px</li>
+<li><strong>File</strong>: <code>multiple-partitions-multiple-consumers.svg</code></li>
+<li><strong>Description</strong>: Messages distributed across multiple partitions</li>
+<li><strong>Dimensions</strong>: 1000x600px</li>
 </ul>
 <h3 id="backpressure-handling">Backpressure Handling</h3>
 <ul>
@@ -74,7 +80,7 @@
 </ul>
 <h2 id="usage">Usage</h2>
 <p>These diagrams are automatically generated and can be included in your presentations by referencing them in your Markdown files:</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-markdown">![<span class="hljs-string">Single Partition Processing</span>](<span class="hljs-link">./marbles/single-partition.svg</span>)
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-markdown">![<span class="hljs-string">Topic Processing</span>](<span class="hljs-link">./marbles/simple-topic.svg</span>)
 </code></pre>
 <h2 id="regenerating">Regenerating</h2>
 <p>To regenerate all marble diagrams, run:</p>

@@ -248,34 +248,34 @@ A bit about the architecture of Kafka
 | P0 Follower   | P0 Leader     | **P0 Leader** |
 | P1 Follower   | **P1 Leader** | P1 Follower   |
 | **P2 Leader** | P2 Follower   | P2 Follower   |
-| P4 Follower   | **P4 Leader** | P2 Follower   |
+| P3 Follower   | **P3 Leader** | P3 Follower   |
 
 ---
 
 # Availability or Consistency
 
-## replication.factor
+## Partition Replication
 
-- replication.factor=1: Single copy (no redundancy)
-- replication.factor=2: Two copies (basic redundancy)
-- replication.factor=3: Three copies (typical production setting)
+- **replication.factor=1** _Single copy_ (no redundancy)
+- **replication.factor=2** _Two copies_ (basic redundancy)
+- **replication.factor=3** _Three copies_ (typical production setting)
 
 ## Write Acknowledgements
 
-- min.insync.replicas
-- acks={ all, 1, 0 }
+- **min.insync.replicas**
+- **acks={ all, 1, 0 }**
 
 ---
 
-# High Availability
+# High Availability - acks=1
 
 ![w:1200](diagrams/high-availability.svg)
 
 ---
 
-# High Consistency
+# High Consistency - acks=all
 
-![w:1200](diagrams/high-consistency.svg)
+![w:1000](diagrams/high-consistency.svg)
 
 ---
 
@@ -289,13 +289,54 @@ What retention policy for Consumer Group offset?
 
 ---
 
-# What makes Kafka hard to use?
+# Kafka Topics not Covered
 
-- Service ownership
+- Kafka Connect - Integration framework
+- Kafka Streams - Pipeline framework
+
+---
+
+<!--
+
+Append-only
+
+-->
+
+# Hard Stuff
+
+## Organizational Challenges
+
+- Service ownership, Permissions
+- Event versioning
+- Capacity planning, Topic versioning
+
+## Service Challenges
+
 - Observability
 - Event loss remediation
-- Topic versioning, Event versioning
-- Capacity planning
+- Retention Policies can be problematic
+
+---
+
+# When to Avoid Kafka
+
+- Internal job processing
+- Not massive scale
+- Don't have dedicated staff
+- Real-time isn't necessary
+
+---
+
+# Managed Services
+
+## Example - Apache Kafka on Heroku
+
+| Parameter              | Default  | Lower Limit | Upper Limit                          |
+| ---------------------- | -------- | ----------- | ------------------------------------ |
+| Replication            | 3        | 3           | Number of brokers in cluster         |
+| Retention Period       | 24 hours | 6 hours     | Standard: 2 weeks, Extended: 6 weeks |
+| Partitions per Topic   | 32       | 1           | 256                                  |
+| Partitions per Cluster | N/A      | N/A         | 4000 x Number of brokers in cluster  |
 
 ---
 
@@ -303,4 +344,8 @@ What retention policy for Consumer Group offset?
 
 https://kafka.apache.org/documentation/
 
-**Contact:** brownjn12@gmail.com
+LinkedIn: `Joey Brown`
+
+Code Connector Slack: `joeybrown`
+
+Memtech Discord: `joeybrown`
