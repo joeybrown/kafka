@@ -1,0 +1,36 @@
+sequenceDiagram
+    participant P as Producer
+    participant L as Leader Partition
+    participant F1 as Follower 1
+    participant F2 as Follower 2
+    participant F3 as Follower 3
+
+    Note over P,F3: High Availability: acks=0 vs acks=all
+
+    rect rgb(240, 248, 255)
+        Note over P,F3: acks=0: Fire and Forget (High Throughput)
+        P->>L: 1. Send Record (acks=0)
+        Note over L: Leader receives record
+        L->>F1: 2. Replicate to Follower 1
+        L->>F2: 2. Replicate to Follower 2
+        L->>F3: 2. Replicate to Follower 3
+        Note over P: Producer continues immediately<br/>No waiting for persistence
+    end
+
+    rect rgb(255, 240, 240)
+        Note over P,F3: acks=all: Wait for Persistence (High Durability)
+        P->>L: 3. Send Record (acks=all)
+        Note over L: Leader receives record
+        L->>F1: 4. Replicate to Follower 1
+        L->>F2: 4. Replicate to Follower 2
+        L->>F3: 4. Replicate to Follower 3
+        Note over F1,F3: Followers persist to disk
+        F1->>L: 5. ACK (persisted)
+        F2->>L: 5. ACK (persisted)
+        F3->>L: 5. ACK (persisted)
+        Note over L: Leader waits for min.insync.replicas
+        L->>P: 6. ACK to Producer
+        Note over P: Producer waits for confirmation<br/>Higher latency, guaranteed durability
+    end
+
+    Note over P,F3: Trade-off: Throughput vs Durability

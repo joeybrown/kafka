@@ -157,8 +157,8 @@
       </g>
     
     
-      <!-- Partition stream -->
-      <text x="30" y="195" class="stream-label">Partition:</text>
+      <!-- Partition0 stream -->
+      <text x="30" y="195" class="stream-label">Partition0:</text>
       <line x1="50" y1="220" x2="750" y2="220" class="timeline" />
       <line x1="750" y1="220" x2="770" y2="220" class="timeline-arrow" />
       

@@ -55,7 +55,7 @@
   
   <!-- Title -->
   <text x="30" y="35" class="title">Topic Processing</text>
-  <text x="30" y="55" class="description">Messages flowing through a topic in order</text>
+  <text x="30" y="55" class="description">Consumers track offsets</text>
   
   <!-- Frame markers -->
   
@@ -121,7 +121,7 @@
     
   
   <!-- Component group backgrounds -->
-  <rect x="20" y="75" width="760" height="65" class="producer-bg" /><rect x="20" y="175" width="760" height="65" class="topic-bg" /><rect x="20" y="275" width="760" height="65" class="consumer-bg" />
+  <rect x="20" y="75" width="760" height="65" class="producer-bg" /><rect x="20" y="175" width="760" height="65" class="topic-bg" /><rect x="20" y="175" width="760" height="65" class="partition-bg" /><rect x="20" y="275" width="760" height="65" class="consumer-bg" />
   
   <!-- Streams -->
   
@@ -157,8 +157,8 @@
       </g>
     
     
-      <!-- Topic stream -->
-      <text x="30" y="195" class="stream-label">Topic:</text>
+      <!-- Topic (partition0) stream -->
+      <text x="30" y="195" class="stream-label">Topic (partition0):</text>
       <line x1="50" y1="220" x2="750" y2="220" class="timeline" />
       <line x1="750" y1="220" x2="770" y2="220" class="timeline-arrow" />
       

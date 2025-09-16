@@ -7,7 +7,7 @@ This directory contains RxJS-style marble diagrams that visualize how Kafka part
 
 ### Topic Processing
 - **File**: `simple-topic.svg`
-- **Description**: Messages flowing through a topic in order
+- **Description**: Consumers track offsets
 - **Dimensions**: 800x400px
 
 ### Single Partition Processing

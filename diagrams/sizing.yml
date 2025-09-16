@@ -5,3 +5,9 @@ diagrams:
     width: 800
   system-integration:
     width: 1200
+  partition-key:
+    width: 1000
+  high-availability:
+    width: 1200
+  high-consistency:
+    width: 1200

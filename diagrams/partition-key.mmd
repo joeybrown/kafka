@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant B as Broker
+    participant P as Producer
+    participant P0 as Partition0
+    participant P1 as Partition1
+    participant P2 as Partition2
+    
+    B->>+P: Key: UserID_x2342
+    P->>-P0: Persist with offset 0
+    B->>+P: Key: UserID_x5615
+    P->>-P1: Persist with offset 0
+    B->>+P: Key: UserID_x8841
+    P->>-P1: Persist with offset 1
+    B->>+P: Key: UserID_x7741
+    P->>-P2: Persist with offset 0

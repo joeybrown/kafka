@@ -4,12 +4,12 @@
 diagrams:
   simple-topic:
     title: "Topic Processing"
-    description: "Messages flowing through a topic in order"
+    description: "Consumers track offsets"
     width: 800
     height: 400
     streams:
       producer: "a---b---c---d---e"
-      topic: "a---b---c---d---e"
+      topic (partition0): "a---b---c---d---e"
       consumer: "-a---b---c---d---e"
 
   single-partition:
@@ -19,7 +19,7 @@ diagrams:
     height: 400
     streams:
       producer: "a---b---c---d---e"
-      partition: "a---b---c---d---e"
+      partition0: "a---b---c---d---e"
       consumer: "-a---b---c---d---e"
 
   multiple-partitions-single-consumer:
