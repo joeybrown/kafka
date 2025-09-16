@@ -48,6 +48,8 @@ _Date: September 16, 2025_
 
 # How does Kafka work?
 
+Decoupled from Service Implementation, Coupled to Record Keeping
+
 - Systems produce records
 - Kafka persists records
 - Systems consume records
@@ -132,7 +134,6 @@ Category of records. Groups of related facts.
 
 - Topics are typically owned by one producer
 - Typically have one or more consumer
-- Decoupled from Service Implementation, Coupled to Record Keeping
 
 ---
 
