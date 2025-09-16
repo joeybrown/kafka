@@ -41,7 +41,7 @@ jobs:
           mkdir -p ./dist
 
           # Start Marp server in background
-          yarn serve &
+          yarn dev &
           SERVER_PID=$!
 
           # Poll server until ready (max 30 attempts, 1 second each)
