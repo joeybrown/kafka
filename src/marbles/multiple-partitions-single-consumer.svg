@@ -39,6 +39,8 @@
       .frame-number { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; fill: #95a5a6; }
       .marble-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; font-weight: bold; fill: white; text-anchor: middle; }
       .marble-text-dark { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #2c3e50; text-anchor: middle; }
+      .offset-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; font-weight: 600; fill: #2c3e50; text-anchor: middle; }
+      .offset-bg { fill: #ecf0f1; fill-opacity: 0.8; stroke: #bdc3c7; stroke-width: 1; rx: 3; }
     </style>
     <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
       <polygon points="0 0, 12 4, 0 8" fill="#34495e" />
@@ -171,14 +173,29 @@
         <text x="50" y="224" class="marble-text">a</text>
       </g>
     
+      <g>
+        <rect x="25" y="244" width="50" height="16" class="offset-bg" />
+        <text x="50" y="255" class="offset-label">offset: 0</text>
+      </g>
+    
       <g filter="url(#marbleShadow)">
         <circle cx="410" cy="220" r="12" class="marble-purple" />
         <text x="410" y="224" class="marble-text">c</text>
       </g>
     
+      <g>
+        <rect x="385" y="244" width="50" height="16" class="offset-bg" />
+        <text x="410" y="255" class="offset-label">offset: 1</text>
+      </g>
+    
       <g filter="url(#marbleShadow)">
         <circle cx="635" cy="220" r="12" class="marble-red" />
         <text x="635" y="224" class="marble-text">e</text>
+      </g>
+    
+      <g>
+        <rect x="610" y="244" width="50" height="16" class="offset-bg" />
+        <text x="635" y="255" class="offset-label">offset: 2</text>
       </g>
     
     
@@ -193,14 +210,29 @@
         <text x="230" y="324" class="marble-text">b</text>
       </g>
     
+      <g>
+        <rect x="205" y="344" width="50" height="16" class="offset-bg" />
+        <text x="230" y="355" class="offset-label">offset: 0</text>
+      </g>
+    
       <g filter="url(#marbleShadow)">
         <circle cx="455" cy="320" r="12" class="marble-orange" />
         <text x="455" y="324" class="marble-text">d</text>
       </g>
     
+      <g>
+        <rect x="430" y="344" width="50" height="16" class="offset-bg" />
+        <text x="455" y="355" class="offset-label">offset: 1</text>
+      </g>
+    
       <g filter="url(#marbleShadow)">
         <circle cx="815" cy="320" r="12" class="marble-yellow" />
         <text x="815" y="324" class="marble-text">f</text>
+      </g>
+    
+      <g>
+        <rect x="790" y="344" width="50" height="16" class="offset-bg" />
+        <text x="815" y="355" class="offset-label">offset: 2</text>
       </g>
     
     

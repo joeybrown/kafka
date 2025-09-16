@@ -153,6 +153,8 @@ function generateMarbleSVG(config) {
       .frame-number { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; fill: #95a5a6; }
       .marble-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; font-weight: bold; fill: white; text-anchor: middle; }
       .marble-text-dark { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #2c3e50; text-anchor: middle; }
+      .offset-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; font-weight: 600; fill: #2c3e50; text-anchor: middle; }
+      .offset-bg { fill: #ecf0f1; fill-opacity: 0.8; stroke: #bdc3c7; stroke-width: 1; rx: 3; }
     </style>
     <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
       <polygon points="0 0, 12 4, 0 8" fill="#34495e" />
@@ -240,7 +242,7 @@ function generateMarbleSVG(config) {
       <line x1="50" y1="${y}" x2="${width - 50}" y2="${y}" class="timeline" />
       <line x1="${width - 50}" y1="${y}" x2="${width - 30}" y2="${y}" class="timeline-arrow" />
       
-      ${generateRxJSMarbles(marbleString, 50, y, width - 100, index, Object.keys(streams).length)}
+      ${generateRxJSMarbles(marbleString, 50, y, width - 100, index, Object.keys(streams).length, streamName)}
     `;
   }).join('')}
   
@@ -250,11 +252,12 @@ function generateMarbleSVG(config) {
 }
 
 // Function to generate authentic RxJS marble diagrams with message-based coloring
-function generateRxJSMarbles(marbleString, startX, y, width, streamIndex, totalStreams) {
+function generateRxJSMarbles(marbleString, startX, y, width, streamIndex, totalStreams, streamName) {
   const marbles = [];
   const frameWidth = width / 20; // 20 time frames
   const marbleSize = 12; // Marble radius
   let currentFrame = 0;
+  let messageCount = 0; // Track message count for offset labels
   
   // Parse the marble string and create marbles with proper timing
   for (let i = 0; i < marbleString.length; i++) {
@@ -272,32 +275,39 @@ function generateRxJSMarbles(marbleString, startX, y, width, streamIndex, totalS
       // Ensure marble stays within timeline bounds (accounting for marble radius)
       const x = Math.min(startX + (currentFrame * frameWidth), startX + width - marbleSize - 20);
       const marbleClass = getMessageColor(char);
-      marbles.push(createMarble(x, y, char, marbleClass));
+      const isPartitionStream = streamName && (streamName.toLowerCase().includes('partition') || streamName.toLowerCase().includes('topic'));
+      marbles.push(createMarble(x, y, char, marbleClass, isPartitionStream, messageCount));
+      messageCount++;
       currentFrame++;
     } else if (char === 'R') {
       // Rebalancing event
       const x = Math.min(startX + (currentFrame * frameWidth), startX + width - marbleSize - 20);
-      marbles.push(createMarble(x, y, 'R', 'marble-special'));
+      const isPartitionStream = streamName && (streamName.toLowerCase().includes('partition') || streamName.toLowerCase().includes('topic'));
+      marbles.push(createMarble(x, y, 'R', 'marble-special', isPartitionStream, messageCount));
       currentFrame++;
     } else if (char === 'X') {
       // Error marble
       const x = Math.min(startX + (currentFrame * frameWidth), startX + width - marbleSize - 20);
-      marbles.push(createMarble(x, y, 'X', 'marble-error'));
+      const isPartitionStream = streamName && (streamName.toLowerCase().includes('partition') || streamName.toLowerCase().includes('topic'));
+      marbles.push(createMarble(x, y, 'X', 'marble-error', isPartitionStream, messageCount));
       currentFrame++;
     } else if (char === '|') {
       // Completion marble - place at the very end
       const x = startX + width - marbleSize;
-      marbles.push(createMarble(x, y, '|', 'marble-complete'));
+      const isPartitionStream = streamName && (streamName.toLowerCase().includes('partition') || streamName.toLowerCase().includes('topic'));
+      marbles.push(createMarble(x, y, '|', 'marble-complete', isPartitionStream, messageCount));
       currentFrame++;
     } else if (char === 'C') {
       // Compaction event
       const x = Math.min(startX + (currentFrame * frameWidth), startX + width - marbleSize - 20);
-      marbles.push(createMarble(x, y, 'C', 'marble-special'));
+      const isPartitionStream = streamName && (streamName.toLowerCase().includes('partition') || streamName.toLowerCase().includes('topic'));
+      marbles.push(createMarble(x, y, 'C', 'marble-special', isPartitionStream, messageCount));
       currentFrame++;
     } else if (char === 'L') {
       // Lag indicator
       const x = Math.min(startX + (currentFrame * frameWidth), startX + width - marbleSize - 20);
-      marbles.push(createMarble(x, y, 'L', 'marble-special'));
+      const isPartitionStream = streamName && (streamName.toLowerCase().includes('partition') || streamName.toLowerCase().includes('topic'));
+      marbles.push(createMarble(x, y, 'L', 'marble-special', isPartitionStream, messageCount));
       currentFrame++;
     }
   }
@@ -416,13 +426,15 @@ function generateSmartLegend(streams, width) {
 }
 
 // Helper function to create a marble with proper styling
-function createMarble(x, y, char, className) {
+function createMarble(x, y, char, className, isPartitionStream = false, messageCount = 0) {
   const marbleSize = 12;
   const shadowFilter = 'url(#marbleShadow)';
   
+  let marbleElement = '';
+  
   if (className === 'marble-special') {
     // Special marbles (rebalancing, compaction, etc.) - diamond shape
-    return `
+    marbleElement = `
       <g filter="${shadowFilter}">
         <polygon points="${x},${y - marbleSize} ${x + marbleSize},${y} ${x},${y + marbleSize} ${x - marbleSize},${y}" 
                  class="${className}" />
@@ -431,7 +443,7 @@ function createMarble(x, y, char, className) {
     `;
   } else if (className === 'marble-error') {
     // Error marbles - square shape
-    return `
+    marbleElement = `
       <g filter="${shadowFilter}">
         <rect x="${x - marbleSize}" y="${y - marbleSize}" width="${marbleSize * 2}" height="${marbleSize * 2}" 
               class="${className}" rx="3" />
@@ -440,13 +452,27 @@ function createMarble(x, y, char, className) {
     `;
   } else {
     // Regular marbles - circle shape
-    return `
+    marbleElement = `
       <g filter="${shadowFilter}">
         <circle cx="${x}" cy="${y}" r="${marbleSize}" class="${className}" />
         <text x="${x}" y="${y + 4}" class="marble-text">${char}</text>
       </g>
     `;
   }
+  
+  // Add offset label for partition streams
+  if (isPartitionStream && (char.match(/[a-z]/) || char === '|')) {
+    const offsetY = y + marbleSize + 20;
+    const offsetText = char === '|' ? 'EOF' : `offset: ${messageCount}`;
+    marbleElement += `
+      <g>
+        <rect x="${x - 25}" y="${offsetY - 8}" width="50" height="16" class="offset-bg" />
+        <text x="${x}" y="${offsetY + 3}" class="offset-label">${offsetText}</text>
+      </g>
+    `;
+  }
+  
+  return marbleElement;
 }
 
 // Generate all marble diagrams
