@@ -31,7 +31,7 @@ diagrams:
       producer: "a---b---cd---e---f"
       partition0: "a-------c----e"
       partition1: "----b----d-------f"
-      consumer: "-a---b----dc--e---f"
+      consumer: "-a---b---c----ed--f"
 
   multiple-partitions-multiple-consumers:
     title: "Multiple Partitions Multiple Consumers"

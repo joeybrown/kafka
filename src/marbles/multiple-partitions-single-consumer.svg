@@ -253,18 +253,18 @@
       </g>
     
       <g filter="url(#marbleShadow)">
-        <circle cx="500" cy="420" r="12" class="marble-orange" />
-        <text x="500" y="424" class="marble-text">d</text>
-      </g>
-    
-      <g filter="url(#marbleShadow)">
-        <circle cx="545" cy="420" r="12" class="marble-purple" />
-        <text x="545" y="424" class="marble-text">c</text>
+        <circle cx="455" cy="420" r="12" class="marble-purple" />
+        <text x="455" y="424" class="marble-text">c</text>
       </g>
     
       <g filter="url(#marbleShadow)">
         <circle cx="680" cy="420" r="12" class="marble-red" />
         <text x="680" y="424" class="marble-text">e</text>
+      </g>
+    
+      <g filter="url(#marbleShadow)">
+        <circle cx="725" cy="420" r="12" class="marble-orange" />
+        <text x="725" y="424" class="marble-text">d</text>
       </g>
     
       <g filter="url(#marbleShadow)">
