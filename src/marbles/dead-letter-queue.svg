@@ -8,6 +8,7 @@
       .timeline { stroke: #34495e; stroke-width: 3; fill: none; }
       .timeline-arrow { stroke: #34495e; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
       .producer-bg { fill: #e8f5e8; fill-opacity: 0.3; stroke: #27ae60; stroke-width: 1; stroke-dasharray: 5,5; }
+      .topic-bg { fill: #f3e5f5; fill-opacity: 0.3; stroke: #9b59b6; stroke-width: 1; stroke-dasharray: 5,5; }
       .partition-bg { fill: #e8f4fd; fill-opacity: 0.3; stroke: #3498db; stroke-width: 1; stroke-dasharray: 5,5; }
       .consumer-bg { fill: #fef9e7; fill-opacity: 0.3; stroke: #f39c12; stroke-width: 1; stroke-dasharray: 5,5; }
       .marble { fill: #3498db; stroke: #2980b9; stroke-width: 2; }

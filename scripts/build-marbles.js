@@ -122,6 +122,7 @@ function generateMarbleSVG(config) {
       .timeline { stroke: #34495e; stroke-width: 3; fill: none; }
       .timeline-arrow { stroke: #34495e; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
       .producer-bg { fill: #e8f5e8; fill-opacity: 0.3; stroke: #27ae60; stroke-width: 1; stroke-dasharray: 5,5; }
+      .topic-bg { fill: #f3e5f5; fill-opacity: 0.3; stroke: #9b59b6; stroke-width: 1; stroke-dasharray: 5,5; }
       .partition-bg { fill: #e8f4fd; fill-opacity: 0.3; stroke: #3498db; stroke-width: 1; stroke-dasharray: 5,5; }
       .consumer-bg { fill: #fef9e7; fill-opacity: 0.3; stroke: #f39c12; stroke-width: 1; stroke-dasharray: 5,5; }
       .marble { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
@@ -182,6 +183,9 @@ function generateMarbleSVG(config) {
     const producerStreams = Object.entries(streams).filter(([name]) => 
       name.toLowerCase().includes('producer') || name.toLowerCase().includes('message')
     );
+    const topicStreams = Object.entries(streams).filter(([name]) => 
+      name.toLowerCase().includes('topic')
+    );
     const partitionStreams = Object.entries(streams).filter(([name]) => 
       name.toLowerCase().includes('partition') || name.toLowerCase().includes('buffer')
     );
@@ -199,6 +203,13 @@ function generateMarbleSVG(config) {
       const firstProducerY = 120 + (Object.keys(streams).indexOf(producerStreams[0][0]) * 100) - 45; // Include label area
       const lastProducerY = 120 + (Object.keys(streams).indexOf(producerStreams[producerStreams.length - 1][0]) * 100) + 20;
       backgrounds += `<rect x="20" y="${firstProducerY}" width="${width - 40}" height="${lastProducerY - firstProducerY}" class="producer-bg" />`;
+    }
+    
+    // Topic background
+    if (topicStreams.length > 0) {
+      const firstTopicY = 120 + (Object.keys(streams).indexOf(topicStreams[0][0]) * 100) - 45; // Include label area
+      const lastTopicY = 120 + (Object.keys(streams).indexOf(topicStreams[topicStreams.length - 1][0]) * 100) + 20;
+      backgrounds += `<rect x="20" y="${firstTopicY}" width="${width - 40}" height="${lastTopicY - firstTopicY}" class="topic-bg" />`;
     }
     
     // Partition background
