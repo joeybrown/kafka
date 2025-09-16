@@ -2,6 +2,16 @@
 # This file defines various Kafka partition scenarios as marble diagrams
 
 diagrams:
+  simple-topic:
+    title: "Topic Processing"
+    description: "Messages flowing through a topic in order"
+    width: 800
+    height: 400
+    streams:
+      producer: "a---b---c---d---e"
+      topic: "a---b---c---d---e"
+      consumer: "-a---b---c---d---e"
+
   single-partition:
     title: "Single Partition Processing"
     description: "Messages flowing through a single Kafka partition in order"
@@ -12,28 +22,28 @@ diagrams:
       partition: "a---b---c---d---e"
       consumer: "-a---b---c---d---e"
 
-  multiple-partitions:
-    title: "Multiple Partition Processing"
-    description: "Messages distributed across multiple partitions for parallel processing"
+  multiple-partitions-single-consumer:
+    title: "Multiple Partitions Single Consumer"
+    description: "Messages distributed across multiple partitions"
     width: 1000
     height: 500
     streams:
-      producer: "a---b---c---d---e---f"
-      partition0: "a-------c-------e"
-      partition1: "----b-------d-------f"
-      consumer: "--a---b---c---d---e---f"
+      producer: "a---b---cd---e---f"
+      partition0: "a-------c----e"
+      partition1: "----b----d-------f"
+      consumer: "-a---b----dc--e---f"
 
-  partition-rebalancing:
-    title: "Consumer Group Rebalancing"
-    description: "How consumers handle partition reassignment when group membership changes"
-    width: 1200
+  multiple-partitions-multiple-consumers:
+    title: "Multiple Partitions Multiple Consumers"
+    description: "Messages distributed across multiple partitions"
+    width: 1000
     height: 600
     streams:
-      partition0: "a---b---c---d---e---f"
-      partition1: "---x---y---z---w---v---u"
-      consumer1: "a---b---c---d---e---f"
-      consumer2: "---x---y---z---w---v---u"
-      rebalance: "-------R"
+      producer: "a---b---cd---e---f"
+      partition0: "a-------c----e"
+      partition1: "----b----d-------f"
+      consumer0: "-a-------c----e"
+      consumer1: "-----b----d-------f"
 
   backpressure:
     title: "Backpressure Handling"

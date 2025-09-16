@@ -5,20 +5,25 @@ This directory contains RxJS-style marble diagrams that visualize how Kafka part
 ## Generated Diagrams
 
 
+### Topic Processing
+- **File**: `simple-topic.svg`
+- **Description**: Messages flowing through a topic in order
+- **Dimensions**: 800x400px
+
 ### Single Partition Processing
 - **File**: `single-partition.svg`
 - **Description**: Messages flowing through a single Kafka partition in order
 - **Dimensions**: 800x400px
 
-### Multiple Partition Processing
-- **File**: `multiple-partitions.svg`
-- **Description**: Messages distributed across multiple partitions for parallel processing
+### Multiple Partitions Single Consumer
+- **File**: `multiple-partitions-single-consumer.svg`
+- **Description**: Messages distributed across multiple partitions
 - **Dimensions**: 1000x500px
 
-### Consumer Group Rebalancing
-- **File**: `partition-rebalancing.svg`
-- **Description**: How consumers handle partition reassignment when group membership changes
-- **Dimensions**: 1200x600px
+### Multiple Partitions Multiple Consumers
+- **File**: `multiple-partitions-multiple-consumers.svg`
+- **Description**: Messages distributed across multiple partitions
+- **Dimensions**: 1000x600px
 
 ### Backpressure Handling
 - **File**: `backpressure.svg`
@@ -61,7 +66,7 @@ This directory contains RxJS-style marble diagrams that visualize how Kafka part
 These diagrams are automatically generated and can be included in your presentations by referencing them in your Markdown files:
 
 ```markdown
-![Single Partition Processing](./marbles/single-partition.svg)
+![Topic Processing](./marbles/simple-topic.svg)
 ```
 
 ## Regenerating

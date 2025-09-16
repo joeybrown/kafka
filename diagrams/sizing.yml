@@ -3,3 +3,5 @@
 diagrams:
   kafka-sequence:
     width: 800
+  system-integration:
+    width: 1200

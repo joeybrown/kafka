@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant S as Store Front
+    participant P as Purchases Topic
+    participant I as Inventory
+    participant N as Notifications
+    participant R as Recommendations
+    participant F as Fraud Detection
+    
+    S->>P: User purchased some stuff
+    P->>I: Consume and remove items from Inventory
+    P->>N: Consume and send confirmation
+    P->>R: Consume and make recommendations
+    P->>F: Consume and use data for fraud detection
