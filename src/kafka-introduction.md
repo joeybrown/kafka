@@ -139,7 +139,7 @@ Category of records. Groups of related facts.
 
 <!--
 
-Before getting into next topic, partitions
+Dumb broker makes partitions necessary.
 
 -->
 
@@ -232,9 +232,16 @@ Ordering of messages
 
 # Consumer Lag
 
-- **Consumer Group Offset** vs **Most Recent Offset**
+- **Current Offset** vs **Log End Offset**
 - _How far behind the consumer is from real-time data_
 - Eventual Consistency
+
+---
+
+# Consumer Buffering
+
+- Consumers not beholden to consumer offset
+- **High Watermark** - can read up to this record
 
 ---
 
