@@ -7,7 +7,7 @@
   "scripts": {
     "build": "node scripts/build-diagrams.js && node scripts/build-marbles.js && marp --input-dir ./src --output-dir ./dist --allow-local-files",
     "build:pdf": "marp ./src/kafka-introduction.md --pdf --output ./dist/kafka-introduction.pdf --allow-local-files",
-    "serve": "node scripts/build-diagrams.js && node scripts/build-marbles.js && marp --input-dir ./src --server --allow-local-files",
+    "serve": "marp --input-dir ./src --server --allow-local-files --port $PORT",
     "watch": "node scripts/build-diagrams.js && node scripts/build-marbles.js && marp --input-dir ./src --output-dir ./dist --watch --allow-local-files",
     "dev": "node scripts/build-diagrams.js && node scripts/build-marbles.js && marp --input-dir ./src --server --watch --allow-local-files",
     "marbles": "node scripts/build-marbles.js",
@@ -22,7 +22,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@marp-team/marp-cli": "^4.2.3",
     "@mermaid-js/mermaid-cli": "^11.9.0",
     "puppeteer": "^24.19.0",
     "js-yaml": "^4.1.0",
@@ -30,6 +29,11 @@
     "rxjs-marbles": "^7.0.0"
   },
   "dependencies": {
+    "@marp-team/marp-cli": "^4.2.3",
     "@marp-team/marp-core": "^4.1.0"
+  },
+  "engines": {
+    "node": "22.x",
+    "npm": "10.x"
   }
 }
