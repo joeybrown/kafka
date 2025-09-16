@@ -301,12 +301,15 @@ What retention policy for Consumer Group offset?
 
 - Kafka Connect - Integration framework
 - Kafka Streams - Pipeline framework
+- Confluent Enterprise Offerings
 
 ---
 
 <!--
 
-Append-only
+Append-only log. Secrets, PII cannot be easily purged, for instance.
+
+Legal requirements. If you say you've deleted data--have you?
 
 -->
 
