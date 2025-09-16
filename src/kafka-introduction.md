@@ -196,12 +196,6 @@ Ordering of messages
 
 ---
 
-# Single Partition Processing Visualization
-
-![w:800](marbles/single-partition.svg)
-
----
-
 # Multiple Partition Processing
 
 ![w:1000](marbles/multiple-partitions-single-consumer.svg)
